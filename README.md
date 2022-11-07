@@ -22,8 +22,8 @@ Import-Module PoShLog
 Import-Module PoShLog.Sinks.Datadog
 
 $conf = New-SinkDataDogConfiguration -Url "https://http-intake.logs.us3.datadoghq.com"
-New-Logger |
 
+New-Logger |
 Add-SinkPowerShell -RestrictedToMinimumLevel Information |
 Add-SinkDataDog -ApiKey 123ABC -Environment local -Configuration $conf -Service MyServiceName -Source PoShLog -RestrictedToMinimumLevel Debug |
 Start-Logger
