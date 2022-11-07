@@ -1,8 +1,7 @@
 # PoShLog.Sinks.Datadog
 
-[![psgallery](https://img.shields.io/powershellgallery/v/poshlog.sinks.Datadog.svg)](https://www.powershellgallery.com/packages/PoShLog.Sinks.Datadog) [![PowerShell Gallery](htps://imgshields.io/powershellgallery/p/poshlog.sinks.Datadog?color=blue)](https://www.powershellgallery.com/packages/PoShLog.Sinks.Datadog) [![psgallery](https://img.shields.io/powershllgallerydt/PoShLog.Sinks.Datadog.svg)](https://www.powershellgallery.com/packages/PoShLog.Sinks.Datadog) [![Discord](https://img.shields.io/discord/693754316305072199?color=orange&labe=discord)(https://discord.gg/gGFtbf)
 
-PoShLog.Sinks.Datadog is extension module for [PoShLog](https://github.com/PoShLog/PoShLog) logging module. Contains sink that publishes log messages to *ILL_HERE*
+PoShLog.Sinks.Datadog is extension module for [PoShLog](https://github.com/PoShLog/PoShLog) logging module. Contains sink that publishes log messages to DataDog.
 
 ## Getting started
 
@@ -10,7 +9,7 @@ If you are familiar with PowerShell, skip to [Installation](#installation) secti
 
 ### Installation
 
-To install PoShLog.Sinks.Datadog, run following snippet from owershell
+To install PoShLog.Sinks.Datadog, run following snippet from Powershell
 
 ```ps1
 Install-Module -Name PoShLog.Sinks.Datadog
@@ -22,7 +21,12 @@ Install-Module -Name PoShLog.Sinks.Datadog
 Import-Module PoShLog
 Import-Module PoShLog.Sinks.Datadog
 
-FILL_HERE
+$conf = New-SinkDataDogConfiguration -Url "https://http-intake.logs.us3.datadoghq.com"
+New-Logger |
+
+Add-SinkPowerShell -RestrictedToMinimumLevel Information |
+Add-SinkDataDog -ApiKey 123ABC -Environment local -Configuration $conf -Service MyServiceName -Source PoShLog -RestrictedToMinimumLevel Debug |
+Start-Logger
 
 # Don't forget to close the logger
 Close-Logger
